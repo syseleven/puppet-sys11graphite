@@ -2,6 +2,7 @@ class sys11graphite::profile::server(
  $mysql_root_password = 'mysql_root_secure_Ifil8shaqu6m',
 ) {
 
+  require sys11graphite::profile::setup_volume
   include sys11graphite::profile::server::monitoring
 
   class {'::memcached':
