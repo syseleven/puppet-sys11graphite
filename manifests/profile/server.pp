@@ -14,7 +14,7 @@ class sys11graphite::profile::server(
     ensure  => mounted, 
     device  => '/mnt/vdb/mysql', 
     fstype  => 'none', 
-    options => 'rw,bind', 
+    options => 'rw,bind,nobootwait', 
     require => File['/var/lib/mysql'],
   } 
 
