@@ -11,12 +11,16 @@ class sys11graphite::profile::server(
   file {'/var/lib/mysql':
     ensure => directory,
   }
+
+  file { '/mnt/vdb/mysql':
+    ensure => directory,
+  }
   mount { '/var/lib/mysql': 
     ensure  => mounted, 
     device  => '/mnt/vdb/mysql', 
     fstype  => 'none', 
     options => 'rw,bind,nobootwait', 
-    require => File['/var/lib/mysql'],
+    require => File['/var/lib/mysql', '/mnt/vdb/mysql'],
   } 
 
   # needed when /var/lib/mysql already has data in it
