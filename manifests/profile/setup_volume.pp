@@ -6,8 +6,7 @@ class sys11graphite::profile::setup_volume() {
     command => "mkfs.xfs /dev/vdb",
     path    => ['/sbin/', '/usr/sbin/'],
     unless  => "xfs_admin -l /dev/vdb",
-  }
-
+  } ->
   file { '/mnt/vdb':
     ensure => directory,
   } ->
