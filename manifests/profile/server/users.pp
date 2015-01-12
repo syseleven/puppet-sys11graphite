@@ -1,5 +1,5 @@
-class sys11graphite::profile::users(
-  $superusers = {},
+class sys11graphite::profile::server::users(
+  $superusers = false,
 ) {
   define create_superuser() {
     notify{'TBD':}
