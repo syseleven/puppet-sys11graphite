@@ -49,7 +49,11 @@ class sys11graphite::profile::server(
       fail('You need to specify a mysql root password in order to deploy own mysql installation!')
     }
 
-    include sys11graphite::profile::mysql
+    class { 'sys11graphite::profile::mysql':
+      mysql_root_password => $mysql_root_password,
+      mysql_db_name       => $mysql_db_name,
+      mysql_db_password   => $mysql_db_password,
+    }
     $mysql_host_real = 'localhost'
   } else {
     $mysql_host_real = $mysql_host

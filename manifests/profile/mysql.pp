@@ -1,4 +1,8 @@
-class sys11graphite::profile::mysql() {
+class sys11graphite::profile::mysql(
+  $mysql_root_password,
+  $mysql_db_name,
+  $mysql_db_password,
+) {
   # FIXME make this work properly
   # needed when /var/lib/mysql already has data in it
   file { '/root/.my.cnf.temp':
@@ -26,8 +30,8 @@ password='$mysql_root_password'
   }
 
   mysql::db { graphite:
-    user     => 'graphite',
-    password => 'graphite_db_password_moohoo_secret',
+    user     => $mysql_db_name,
+    password => $mysql_db_password,
     host     => 'localhost',
     require  => Class['mysql::server'],
   }
