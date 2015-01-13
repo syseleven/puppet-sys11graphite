@@ -65,9 +65,10 @@ password='$mysql_root_password'
   } ->
 
  exec { 'copy tmp root-my.cnf to root-my.cnf':
-   command => 'cp /root/.my.cnf.old_instance /root/.my.cnf',
+   command => 'cp /root/.my.cnf.old_instance /root/.my.cnf && touch /mnt/vdb/.mysql_instance_created',
    path    => '/bin:/usr/bin',
    unless  => 'mysqladmin --defaults-file=/root/.my.cnf status',
+   creates => '/mnt/vdb/.mysql_instance_created',
    before  => Class['::mysql::server'],
  }
 }
