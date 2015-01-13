@@ -49,4 +49,23 @@ class sys11graphite::profile::setup_volume() {
   }
 
 
+  # dirty workaround for using an existing mysql installation with puppetlabs-mysql
+
+ file { '/root/.my.cnf.old_instance':
+    owner   => 'root',
+    mode    => '0600',
+    content => "
+[client]
+user=root
+host=localhost
+password='$mysql_root_password'
+"
+  } ->
+
+ exec { 'copy tmp root-my.cnf to root-my.cnf':
+   command => 'cp /root/.my.cnf.temp /root/.my.cnf',
+   path    => '/bin:/usr/bin',
+   unless  => 'mysql',
+   before  => Class['::mysql::server'],
+ }
 }
