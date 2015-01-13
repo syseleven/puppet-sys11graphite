@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# 2014, 2015 s.andres@syseleven.de, c.glaubitz@syseleven.de
+
 import os
 import sys
 
