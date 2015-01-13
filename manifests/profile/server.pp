@@ -75,6 +75,13 @@ class sys11graphite::profile::server(
     require                      => $graphite_require,
   }
 
+  # remove default vhosts to avoid collision
+  file { ['/etc/apache2/sites-enabled/000-default', '/etc/apache2/sites-enabled/000-default.conf']:
+    ensure  => absent,
+    require => Package[$::graphite::params::apache_pkg],
+    before  => Service[$::graphite::params::apache_service_name],
+  }
+
   class { 'sys11graphite::profile::server::users':
     superusers => $superusers,
     require    => Class['::graphite'],
