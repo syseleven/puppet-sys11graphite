@@ -71,5 +71,6 @@ password='$mysql_root_password'
    unless  => 'mysqladmin --defaults-file=/root/.my.cnf status',
    onlyif  => 'test -f /mnt/vdb/mysql/ibdata1',
    before  => Class['::mysql::server'],
+   require => Mount['/mnt/vdb'],
  }
 }
