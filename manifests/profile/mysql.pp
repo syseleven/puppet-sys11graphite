@@ -14,6 +14,12 @@ class sys11graphite::profile::mysql(
     password => $mysql_db_password,
     host     => 'localhost',
     require  => Class['mysql::server'],
+  }  ~>
+  # init database mysql -e 'drop database graphite; create database graphite'; { echo  'no'; } | python /opt/graphite/webapp/graphite/manage.py syncdb 
+  exec {'create graphite db':
+    command     => 'python /opt/graphite/webapp/graphite/manage.py syncdb',
+    provider    => 'shell',
+    refreshonly => true,
   }
 
 }

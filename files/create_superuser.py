@@ -8,7 +8,17 @@ if __name__ == "__main__":
 
     from django.contrib.auth.models import UserManager
     from django.contrib.auth.models import User
+    from django.db import IntegrityError
+    from django.contrib.auth.models import User
 
     mgmt = UserManager()
     mgmt.model = User
-    mgmt.create_superuser(sys.argv[1], sys.argv[2], sys.argv[3])
+    #import ipdb;ipdb.set_trace()
+    try: 
+      mgmt.create_superuser(sys.argv[1], sys.argv[2], sys.argv[3])
+    # reset password if user exist ...
+    except IntegrityError:
+      u = User.objects.get(username__exact=sys.argv[1])
+      u.set_password(sys.argv[3])
+      u.save()
+
