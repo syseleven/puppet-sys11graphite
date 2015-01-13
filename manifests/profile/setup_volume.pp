@@ -1,4 +1,6 @@
-class sys11graphite::profile::setup_volume() {
+class sys11graphite::profile::setup_volume(
+  $mysql_root_password = $sys11graphite::profile::server::mysql_root_password,
+) {
 
   require sys11graphite::profile::tools
 
