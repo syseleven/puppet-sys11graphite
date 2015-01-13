@@ -64,11 +64,12 @@ password='$mysql_root_password'
 "
   } ->
 
+  # only run when existing data is in volume
  exec { 'copy tmp root-my.cnf to root-my.cnf':
-   command => 'cp /root/.my.cnf.old_instance /root/.my.cnf && touch /mnt/vdb/.mysql_instance_created',
+   command => 'cp /root/.my.cnf.old_instance /root/.my.cnf',
    path    => '/bin:/usr/bin',
    unless  => 'mysqladmin --defaults-file=/root/.my.cnf status',
-   creates => '/mnt/vdb/.mysql_instance_created',
+   onlyif  => 'test -f /mnt/vdb/mysql/ibdata1',
    before  => Class['::mysql::server'],
  }
 }
