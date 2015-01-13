@@ -25,8 +25,9 @@ password='$mysql_root_password'
   #override_options => { 'mysqld'                                                              => { 'datadir' => '/mnt/vdb/mysql'} },
 
   class { '::mysql::server':
-    root_password => $mysql_root_password,
-    #require       => [Mount['/var/lib/mysql'], Exec['copy tmp root-my.cnf to root-my.cnf']],
+    old_root_password => $mysql_root_password,
+    root_password     => $mysql_root_password,
+    #require          => [Mount['/var/lib/mysql'], Exec['copy tmp root-my.cnf to root-my.cnf']],
   }
 
   mysql::db { graphite:
