@@ -37,5 +37,16 @@ class sys11graphite::profile::setup_volume() {
   }
 
 
+  file { '/mnt/vdb/storage':
+    ensure => directory,
+    owner  => 'www-data',
+    group  => 'www-data',
+  } ->
+
+  file { '/opt/graphite/storage':
+    target => '/mnt/vdb/storage',
+    before => Class['::graphite'],
+  }
+
 
 }
