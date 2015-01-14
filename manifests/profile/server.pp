@@ -9,6 +9,7 @@ class sys11graphite::profile::server(
   $mysql_db_name = 'graphite',
   $superusers = false,
   $setup_volume = false,
+  $gr_web_servername = $::fqdn,
   $gr_storage_schemas = [
       {
         name       => 'carbon',
@@ -60,7 +61,7 @@ class sys11graphite::profile::server(
   }
 
   class {'::graphite':
-    gr_web_servername            => 'graphite.sys11.net',
+    gr_web_servername            => $gr_web_servername,
     gr_django_db_engine          => 'django.db.backends.mysql',
     gr_django_db_name            => $mysql_db_name,
     gr_django_db_user            => $mysql_db_user,
