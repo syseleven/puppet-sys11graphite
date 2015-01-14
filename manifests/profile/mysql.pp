@@ -20,6 +20,7 @@ class sys11graphite::profile::mysql(
     command     => 'python /opt/graphite/webapp/graphite/manage.py syncdb',
     provider    => 'shell',
     refreshonly => true,
+    require     => Class['::graphite'],
   }
 
 }
