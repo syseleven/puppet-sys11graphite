@@ -91,4 +91,12 @@ class sys11graphite::profile::server(
   class { 'sys11graphite::profile::server::monitoring':
     require    => Class['::graphite'],
   }
+
+  class { 'sys11graphite::profile::server::dbbackup':
+    require    => Class['::graphite'],
+  }
+
+  class { 'sys11graphite::profile::server::whisper_expire':
+    require    => Class['::graphite'],
+  }
 }
