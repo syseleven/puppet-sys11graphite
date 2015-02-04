@@ -32,6 +32,8 @@ class sys11graphite::profile::server(
     },
 ) {
 
+  require sys11graphite::profile::server::deps
+
   if $setup_volume {
     require sys11graphite::profile::setup_volume
   }
