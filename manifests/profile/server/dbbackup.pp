@@ -13,7 +13,7 @@ class sys11graphite::profile::server::dbbackup (
   file { "${graphite_db_dumpdir}":
     ensure => directory,
     mode   => '0711',
-    owner  => 'root'
+    owner  => 'root',
     group  => 'root',
   } -> 
 
@@ -21,8 +21,8 @@ class sys11graphite::profile::server::dbbackup (
   file { '/usr/local/bin/database-dump':
     ensure  => file,
     mode    => '0555',
-    owner   => 'root'
-    group   => 'root'
+    owner   => 'root',
+    group   => 'root',
     content => template("${module_name}/database-dump.erb"),
   } ->
 
