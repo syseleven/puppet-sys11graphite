@@ -1,6 +1,7 @@
 class sys11graphite::profile::server::dbbackup (
   # Database dumps go here
-  $graphite_db_dumpdir     = '/root/dumps',
+  $graphite_db_dumpdir_instance = '/root/dumps',
+  $graphite_db_dumpdir_volume   = '/mnt/vdb/dumps',
   # execute dump at this cron timespec
   $graphite_db_dump_minute   = 0,
   $graphite_db_dump_hour     = 1,
@@ -10,7 +11,15 @@ class sys11graphite::profile::server::dbbackup (
 ) {
 
   # We will put database dumps here
-  file { "${graphite_db_dumpdir}":
+  file { "${graphite_db_dumpdir_instance}":
+    ensure => directory,
+    mode   => '0711',
+    owner  => 'root',
+    group  => 'root',
+  } -> 
+
+  # We will put database dumps here
+  file { "${graphite_db_dumpdir_volume}":
     ensure => directory,
     mode   => '0711',
     owner  => 'root',
