@@ -1,6 +1,6 @@
 class sys11graphite::profile::server::whisper_expire (
   # Root of the directory containing your wsp files
-  $whisper_datadir         = '/opt/graphite/storage/whisper';
+  $whisper_datadir         = '/opt/graphite/storage/whisper',
   # delete whisper files not written to for 7 days
   $whisper_expire_days_delay = 7,
   # execute deletion at this cron timespec
