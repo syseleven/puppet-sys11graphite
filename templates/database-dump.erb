@@ -4,7 +4,7 @@
 #
 
 DATE="$(date +%Y-%m-%d)"
-DIR="<%= $graphite_db_dumpdir -%>"
+DIR="<%= @graphite_db_dumpdir -%>"
 FILE="$DIR/graphite-$DATE.sql"
 
 # Generate a dump file
