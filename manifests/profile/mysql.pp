@@ -17,9 +17,9 @@ class sys11graphite::profile::mysql(
   }  ~>
   # init database mysql -e 'drop database graphite; create database graphite'; { echo  'no'; } | python /opt/graphite/webapp/graphite/manage.py syncdb
   exec {'create graphite db':
-    command  => 'python /opt/graphite/webapp/graphite/manage.py syncdb',
+    command  => '{ echo no; } | python /opt/graphite/webapp/graphite/manage.py syncdb',
     provider => 'shell',
-    unless   => '[ "$(mysql -e \"show tables\" graphite |wc -l)" -gt 1 ]',
+    unless   => "[ \$(mysql -u graphite -p$mysql_db_password -e show\ tables graphite |wc -l) -gt 1 ]",
     require  => Class['::graphite'],
   }
 
