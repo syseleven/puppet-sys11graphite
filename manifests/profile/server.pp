@@ -36,6 +36,12 @@ class sys11graphite::profile::server(
 
   if $setup_volume {
     require sys11graphite::profile::setup_volume
+
+    # backup only makes sense when volume is available
+    class { 'sys11graphite::profile::server::dbbackup':
+      require    => Class['::graphite'],
+    }
+
   }
 
   if ! $memcache_host  {
@@ -96,9 +102,6 @@ class sys11graphite::profile::server(
     require    => Class['::graphite'],
   }
 
-  class { 'sys11graphite::profile::server::dbbackup':
-    require    => Class['::graphite'],
-  }
 
   class { 'sys11graphite::profile::server::whisper_expire':
     require    => Class['::graphite'],
