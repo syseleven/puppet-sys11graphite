@@ -5,24 +5,6 @@ class sys11graphite::profile::server::monitoring (
     'sensu':  {
       ensure_packages(['nagios-plugins-standard']) # needed for check_mysql
 
-      # there is no purge on type sensu_check
-      sensu::check{ 'check_http_80':
-        ensure  => absent,
-        command => '/dev/null',
-      }
-      sensu::check{ 'check_carbon_cache':
-        ensure  => absent,
-        command => '/dev/null',
-      }
-      sensu::check{ 'check_memcache':
-        ensure  => absent,
-        command => '/dev/null',
-      }
-      sensu::check{ 'check_mysql':
-        ensure  => absent,
-        command => '/dev/null',
-      }
-
       sensu::check{ 'http_80':
         command => 'PATH=\$PATH:/usr/lib/nagios/plugins check_http -H localhost'
       }
